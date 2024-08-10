@@ -1,7 +1,7 @@
 from bookshelf.models import Book
 
 #Retrieving the books
-books = Book.objects.all()                                 
+books = Book.objects.get.all()                                 
 
 #iterating through the records of the books
 for book in books:
