@@ -1,15 +1,20 @@
 #CREATING Book Instance
 #importing Book models
+
 from bookshelf.models import Book
 
 #Creating a Book instance 
-new_book = Book(title = "1984", author = "George Orwell", publication_year = 1949)    
+
+new_book = Book.objects.create(title = "1984", author = "George Orwell", publication_year = 1949)    
 
 #Saving the added book
+
 new_book.save()
 
 print(new_book)
+
 #Expected output: 
+
 1984 by George Orwell (1949)
 
 
@@ -17,7 +22,7 @@ print(new_book)
 from bookshelf.models import Book
 
 #Retrieving the books
-books = Book.objects.all()                                 
+books = Book.objects.get.all()                                 
 
 #iterating through the records of the books
 for book in books:
@@ -33,7 +38,7 @@ from bookshelf.models import Book
 book =Book.objects.get(title="1984")
 
 #Updating the book title
-book.title = "Nineteen Eighty-Four" 
+book.title = Book.objects.update(title = "Nineteen Eighty-Four") 
 
 #Saving the update
 book.save()
@@ -48,7 +53,7 @@ print(updated_book)
 Nineteen Eighty-Four by George Orwell (1949)
 
 
-DELETING the Book instance
+#DELETING the Book instance
 #importing Book models
 from bookshelf.models import Book
 
@@ -62,7 +67,7 @@ book.delete()
 (1, {'bookshelf.Book': 1})
 
 #Trying to retrieve all the books and confirm if deletion was #successful
-books = Book.objects.all()
+books = Book.objects.get.all()
 print(books)
 #Output showing an empty list
 <QuerySet []>
