@@ -21,8 +21,7 @@ for book in books:
 
 #Retrieve the librarian for a library
 librarian_name = "librarian.name"
-librarian = Librarian.objects.get(name=librarian_name)
-library = Library.objects.filter(library=library)
+librarian = Librarian.objects.get(library=librarian_name)
 for librarian in library:
     print(f"Librarian: {librarian.name}) for ({library.name})")
 
