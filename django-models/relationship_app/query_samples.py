@@ -8,7 +8,7 @@ print(books)
 
 #List all books in a library.
 for books in Library:
-    books = Book.objects.get()
+    books = Book.objects.all()
 print(books)
 
 #Retrieve the librarian for a library
