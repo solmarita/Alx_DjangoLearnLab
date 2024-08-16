@@ -7,4 +7,8 @@ from .models import Author, Book, Library, Librarian
 def list_books(request):
     books = Book.objects.all() #fetching all books from the database
     context = {'list_books':books} #creates a context dictionary with list of books
-    return render(request, 'books/list_books.html', context)
+    return render(request, 'relationship_app/list_books.html', context)
+
+
+
+
