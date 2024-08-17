@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 @login_required
 # Create your views here.
@@ -31,8 +32,9 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect ("login")
+            user = form.save()
+            login(request, user)
+            return redirect ("index")
     else:
         form = UserCreationForm()
     return render(request, "register.html", {"form": form})
