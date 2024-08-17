@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render
 #from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, DetailView
@@ -9,6 +10,13 @@ def list_books(request):
     context = {'list_books':books} #creates a context dictionary with list of books
     return render(request, 'relationship_app/list_books.html', context)
 
-
-
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = 'libraries/library_detail.html'
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        library = self.get_object()
+        context['books_list'] = library.get_books_list()
+        return context
+    
 
