@@ -1,21 +1,23 @@
 from typing import Any
 from django.shortcuts import render,redirect
+from .models import Book, Library
+from django.views.generic.detail import DetailView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import UserCreationForm
 
-
+@login_required
 # Create your views here.
-from .models import Book
 def list_books(request):
     books = Book.objects.all() #fetching all books from the database
     context = {'list_books':books} #creates a context dictionary with list of books
     return render(request, 'relationship_app/list_books.html', context)
 
-
-from django.views.generic.detail import DetailView
-from .models import Library
-
+#class-based view for listing books in a library
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
+    
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         library = self.get_object()
@@ -24,9 +26,6 @@ class LibraryDetailView(DetailView):
     
 
 #Setup User Authentication Views
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import LogoutView
-from django.contrib.auth.forms import UserCreationForm
 
 def register(request):
     if request.method == "POST":
@@ -38,15 +37,15 @@ def register(request):
         form = UserCreationForm()
     return render(request, "register.html", {"form": form})
 
-#User login view
-class LoginView(LoginView):
+#User Login View
+class CustomLoginView(LoginView):
     template_name = "login.html"
 
-#user logout view
-class LogoutView(LogoutView):
+#user Logout View
+class CustomLogoutView(LogoutView):
     template_name = "logout.html"
 
-#homepage view
+#Homepage View
 def index(request):
     return render(request, "index.html")
 
