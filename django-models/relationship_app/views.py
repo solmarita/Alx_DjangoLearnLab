@@ -53,5 +53,6 @@ class CustomLogoutView(LogoutView):
 def index(request):
     return render(request, "index.html")
 
+#Setting Up Role-Based Views
 
 

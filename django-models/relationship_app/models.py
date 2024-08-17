@@ -42,5 +42,6 @@ class UserProfile(models.Model):
     
     )
 
-role = models.CharField(max_length=50,  Choices = 'Role_Choices')
+role = models.CharField(max_length=50,  choices = 'Role_Choices')
 userprofile = models.TextField()
+
