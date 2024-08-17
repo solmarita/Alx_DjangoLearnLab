@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.db import models
 
 @login_required
 # Create your views here.
@@ -50,5 +52,19 @@ class CustomLogoutView(LogoutView):
 #Homepage View
 def index(request):
     return render(request, "index.html")
+
+#Extending User Model with a UserProfile
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    Role_Choices =(
+        ('Admin','Admin'),
+        ('Librarian', 'Librarian'),
+        ('Member', 'Member'),
+    
+    )
+
+role = models.CharField(max_length=50,  Choices = 'Role_Choices')
+userprofile = models.TextField()
 
 
