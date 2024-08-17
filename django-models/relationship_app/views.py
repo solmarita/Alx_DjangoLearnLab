@@ -10,6 +10,8 @@ def list_books(request):
     context = {'list_books':books} #creates a context dictionary with list of books
     return render(request, 'relationship_app/list_books.html', context)
 
+
+from .models import Library
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
