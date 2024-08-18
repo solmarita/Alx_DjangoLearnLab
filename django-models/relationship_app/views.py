@@ -6,10 +6,12 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import permission_required
 
 
 
 # Create your views here.
+#Function-based views
 def list_books(request):
     books = Book.objects.all() #fetching all books from the database
     context = {'list_books':books} #creates a context dictionary with list of books
@@ -80,3 +82,17 @@ def is_member(user):
 @user_passes_test(is_member)
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+
+#Views to Enforce Permissions
+@permission_required
+def can_add_book_view(request):
+    return render(request, 'relationship_app/can_add_book.html')
+
+@permission_required
+def can_change_book_view(request):
+    return render(request, 'relationship_app/can_change_book.html')
+
+@permission_required
+def can_delete_book_view(request):
+    return render(request, 'relationship_app/can_delete_book.html')
+
