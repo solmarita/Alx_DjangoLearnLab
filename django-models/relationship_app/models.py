@@ -42,10 +42,11 @@ class UserProfile(models.Model):
     
     )
 
-    role = models.CharField(max_length=50,  choices=Role_Choices)
-    
-    def __str__(self):
-        return f'{self.user.username} - {self.role}'
+role = models.CharField(max_length=50,  choices='Role_Choices')
+userprofile = models.TextField()
+
+def __str__(self):
+    return f'{self.user.username} - {self.role}'
 
 #Signal to automatically create a UserProfile when a new User is created
 from django.db.models.signals import post_save
