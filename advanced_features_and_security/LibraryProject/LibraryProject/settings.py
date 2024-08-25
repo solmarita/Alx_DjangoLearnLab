@@ -147,4 +147,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True #Includes all subdomains in HSTS policy
 
 SECURE_HSTS_PRELOAD = True #Preloads the HSTS policy in the browser
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') #To Address error pointed out by Checker.
+
+
 
