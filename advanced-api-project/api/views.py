@@ -29,6 +29,7 @@ class BookListView(generics.ListCreateAPIView):
     filterset_class = BookFilter
     ordering_fields = ['title', 'publication_year']
     ordering = ['title']
+    search_fields = ['title', 'author']
 
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
