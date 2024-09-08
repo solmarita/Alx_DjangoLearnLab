@@ -9,6 +9,7 @@ from .models import Book
 from .serializers import BookSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import django_filters
+from django_filters import rest_framework
 
 
 class BookFilter(django_filters.FilterSet):
