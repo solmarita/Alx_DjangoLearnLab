@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'rest_framework.authtoken',
     'posts.apps.PostsConfig',
-    'django_filters',
+    #'django_filters',
 ]
     
 
