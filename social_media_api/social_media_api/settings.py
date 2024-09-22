@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+y#w4&qe=+_)$+qdb#0t#3e(=(c%mzb@03p-2!9--pa-=rm62z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = Flase
 
 ALLOWED_HOSTS = []
 
@@ -136,3 +136,16 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 8
 
 }
+
+# Secutiry Middleware Settings
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True  # If using HTTPS
+
+# S3 Settings (specifcs removed for privacy)
+DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = 'your_access_key'
+AWS_SECRET_ACCESS_KEY = 'your_secret_key'
+AWS_STORAGE_BUCKET_NAME = 'your_bucket_name'
