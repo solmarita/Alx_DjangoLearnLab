@@ -1,12 +1,12 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+import rest_framework.permissions as permissions
 from rest_framework.response import Response
 from posts.models import Post
 from accounts.models import CustomUser
 
 # Feed view to show posts from followed users
 class FeedView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         # Get all users the current user is following
