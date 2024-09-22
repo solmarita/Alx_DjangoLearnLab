@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from posts.models import Like, Post
 from notifications.models import Notification
 from django.contrib.contenttypes.models import ContentType
+from rest_framework import generics
 
 # Like a post
 class LikePostView(generics.GenericAPIView):
@@ -68,3 +69,12 @@ class FeedView(generics.GenericAPIView):
         ]
 
         return Response(post_data)
+
+class PostDetailView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get_object(self):
+        # Use get_object_or_404 to retrieve the post by primary key or return a 404
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        return post
