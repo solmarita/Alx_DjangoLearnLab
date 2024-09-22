@@ -76,5 +76,5 @@ class PostDetailView(generics.RetrieveAPIView):
 
     def get_object(self):
         # Use get_object_or_404 to retrieve the post by primary key or return a 404
-        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        post = generics.get_object_or_404(Post, pk=pk)
         return post
