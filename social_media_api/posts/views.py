@@ -71,3 +71,12 @@ class CommentViewSet(viewsets.ModelViewSet):
     
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def feed(request):
+    followed_users = request.user.following.all()
+    posts = Post.objects.filter(author__in=followed_users).order_by('-created_at')
+    post_data = [{'author': post.author.username, 'content': post.content, 'created_at': post.created_at} for post in posts]
+    return Response(post_data)

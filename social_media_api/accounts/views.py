@@ -8,6 +8,12 @@ from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.validators import ValidationError
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from accounts.models import CustomUser
+
 # Create your views here.
 
 #User registration ApiView
@@ -67,3 +73,22 @@ class UserProfileView(APIView):
         user.bio = request.data.get('bio')
         user.save()
         return Response({'message': 'Profile updated successfully'})
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def follow_user(request, user_id):
+    target_user = get_object_or_404(CustomUser, id=user_id)
+    if target_user != request.user:
+        request.user.following.add(target_user)
+        return Response({'status': 'followed'}, status=200)
+    return Response({'error': 'You cannot follow yourself.'}, status=400)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def unfollow_user(request, user_id):
+    target_user = get_object_or_404(CustomUser, id=user_id)
+    if target_user != request.user:
+        request.user.following.remove(target_user)
+        return Response({'status': 'unfollowed'}, status=200)
+    return Response({'error': 'You cannot unfollow yourself.'}, status=400)
